@@ -1,0 +1,54 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <div class="row">
+
+  <div class="col-8 ofsset-2">
+    <br><br>
+    <h1>Create New Listing...</h1>
+    <form method="post" action="/listings" novalidate class="needs-validation">   
+        <div class="mb-3">
+            <label for="title" class="form-lable" >Title</label>
+            <input type="text" name="listing[title]" placeholder="Enter Title" class="form-control" required>
+            <div class="valid-feedback">Title Looks Good</div>
+        </div>
+       
+        <div class="mb-3">
+            <label for="Description" class="form-lable">Description</label>
+            <textarea name="listing[description]" id="" placeholder="Enter Description" class="form-control" required></textarea>
+            <div class="invalid-feedback">Please Enter A Short Description </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Image" class="form-lable">Image</label>
+            <input type="text" name="listing[image]" placeholder="enter image URL/Link" class="form-control">
+        </div>
+
+    <div class="row">
+       
+        <div class="mb-3 col-md-4">
+            <label for="Price" class="form-lable">Price</label>
+            <input type="number" name="listing[price]" placeholder="Enter Price" class="form-control" required>
+            <div class="invalid-feedback">Please Enter Valid Price </div>
+        </div>
+   
+        <div class="mb-3 col-md-8">
+            <label for="Country" class="form-lable">Country</label>
+            <input type="text" name="listing[country]" placeholder="Enter Country" class="form-control" required>
+            <div class="invalid-feedback">Please Enter Valid Country</div>
+        </div>  
+    </div>
+
+        <div class="mb-3">
+            <label for="Location" class="form-lable">Location</label>
+            <input type="text" name="listing[location]" placeholder="Enter Location" class="form-control" required>
+            <div class="invalid-feedback">Please Enter Valid Location</div>
+        </div>
+    
+        <br><br>
+        <button class="btn btn-dark add-btn mb-3">ADD</button>
+        <br>
+    </form>
+</div>
+</div>
+</body>
