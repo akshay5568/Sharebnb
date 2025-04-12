@@ -36,6 +36,10 @@ router.get("/new" , (req, res) => {
 router.get('/:id', WrapAsync(async (req,res) => {
     let {id} = req.params;
     const listingData = await listing.findById(id).populate('reviews');
+    if(!listingData) {
+        req.flash("error", "Listing Not Found")
+        return res.redirect("/listings")
+    }
     res.render("listings/show", {listingData})
 }));
 
@@ -44,11 +48,13 @@ router.get('/:id', WrapAsync(async (req,res) => {
 //Create Route
 router.post('/' , validateListing,
     WrapAsync(async (req,res,next) => {
-   
+
+
     // const {title,description, image,price,location,country} = req.body;
     // let newlisting = {title,description, image,price,location,country} ;
     let newlisting =new listing(req.body.listing);
     await newlisting.save();
+    req.flash("success", "Listing Created Successfully")
     res.redirect("/listings");
 }));
 
@@ -57,6 +63,10 @@ router.post('/' , validateListing,
     router.get('/:id/edit' , WrapAsync(async (req,res,next) => {
         let {id} = req.params;
         const listingData = await listing.findById(id);
+        if(!listingData) {
+            req.flash("error", "Listing Not Found")
+            return res.redirect("/listings")
+        }
        res.render("listings/edit", {listingData})
 }));
 
@@ -65,6 +75,7 @@ router.put("/:id" , WrapAsync(async (req,res) => {
     if(!req.body.listing) throw new ExpressError(400, "Invalid Listing Data");
     let {id} = req.params;
     await listing.findByIdAndUpdate(id, {...req.body.listing});
+    req.flash("success", "Listing Updated Successfully")
     res.redirect(`/listings/${id}`);
 }));
 
@@ -73,6 +84,7 @@ router.put("/:id" , WrapAsync(async (req,res) => {
 router.delete("/:id" , WrapAsync(async (req,res) => {
     let {id} = req.params;
     await listing.findByIdAndDelete(id);
+    req.flash("success", "Listing Deleted Successfully")
     res.redirect("/listings");
 }));
 
