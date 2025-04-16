@@ -24,7 +24,7 @@ module.exports.isOwner = async (req, res, next) => {
     return res.redirect(`/listings/${id}`);
   }
 
-  next(); // ✅ Important! Let the request continue
+  next(); 
 };
 
 
